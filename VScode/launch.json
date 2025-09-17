@@ -1,0 +1,43 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Executar iCEVOS",
+            "request": "launch",
+            "mainClass": "iCEVOS",
+            "cwd": "${workspaceFolder}",
+            "args": [],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen"
+        },
+        {
+            "type": "java",
+            "name": "Executar iCEVOS com Arquivo Personalizado",
+            "request": "launch",
+            "mainClass": "iCEVOS",
+            "cwd": "${workspaceFolder}",
+            "args": ["${input:nomeArquivo}"],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen"
+        },
+        {
+            "type": "java",
+            "name": "Executar Teste de Bloqueio",
+            "request": "launch",
+            "mainClass": "iCEVOS",
+            "cwd": "${workspaceFolder}",
+            "args": ["examples/teste_bloqueio.txt"],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen"
+        }
+    ],
+    "inputs": [
+        {
+            "id": "nomeArquivo",
+            "description": "Nome do arquivo de processos:",
+            "default": "config/processos.txt",
+            "type": "promptString"
+        }
+    ]
+}
