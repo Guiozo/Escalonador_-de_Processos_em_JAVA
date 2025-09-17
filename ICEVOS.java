@@ -49,3 +49,59 @@ public class iCEVOS {
         
         return false;
     }
+    
+// Carrega processos de um arquivo específico
+    private static boolean carregarProcessos(Scheduler scheduler, String caminhoArquivo) {
+        try {
+            File arquivo = new File(caminhoArquivo);
+            if (!arquivo.exists()) {
+                return false;
+            }
+            
+            Scanner scanner = new Scanner(arquivo);
+            System.out.println("Carregando processos do arquivo: " + caminhoArquivo);
+            
+            while (scanner.hasNextLine()) {
+                String linha = scanner.nextLine().trim();
+                
+                // Ignora linhas vazias e comentários
+                if (linha.isEmpty() || linha.startsWith("#")) {
+                    continue;
+                }
+                
+                // Formato esperado: id ,nome , prioridade ,ciclos_necessarios ,recurso_necessario
+                String[] dados = linha.split(",");
+                
+                if (dados.length >= 4) {
+                    try {
+                        int id = Integer.parseInt(dados[0].trim());
+                        String nome = dados[1].trim();
+                        int prioridade = Integer.parseInt(dados[2].trim());
+                        int ciclos = Integer.parseInt(dados[3].trim());
+                        String recurso = null;
+                        
+                        if (dados.length > 4 && !dados[4].trim().isEmpty() && !dados[4].trim().equals("null")) {
+                            recurso = dados[4].trim();
+                        }
+                        
+                        Processo processo = new Processo(id, nome, prioridade, ciclos, recurso);
+                        scheduler.adicionarProcesso(processo);
+                        System.out.println("Carregado: " + processo);
+                        
+                    } catch (NumberFormatException e) {
+                        System.out.println("Erro ao processar linha: " + linha);
+                    }
+                }
+            }
+            
+            scanner.close();
+            return true;
+            
+        } catch (FileNotFoundException e) {
+            // Não exibe erro aqui pois será tentado com outros caminhos
+            return false;
+        } catch (Exception e) {
+            System.out.println("Erro ao ler arquivo " + caminhoArquivo + ": " + e.getMessage());
+            return false;
+        }
+    }
