@@ -1,0 +1,10 @@
+# Arquivo de teste para verificar correção do bug de bloqueio
+# Este teste cria múltiplos processos que solicitam DISCO simultaneamente
+# para verificar se a fila de bloqueados funciona corretamente
+
+1,Compilador1,1,3,DISCO
+2,Compilador2,1,2,DISCO
+3,Editor,2,4,DISCO
+4,Sistema,1,1,
+5,Backup,3,5,DISCO
+6,Firewall,1,1,
