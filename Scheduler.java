@@ -99,3 +99,55 @@ public class Scheduler {
                              lista_bloqueados.getTamanho() + ")");
         }
     }
+    
+// Seleciona o próximo processo seguindo regras de anti-inanição
+    private Processo selecionarProximoProcesso() {
+        // Regra de prevenção de inanição
+        if (contador_ciclos_alta_prioridade >= 5) {
+            System.out.println("Anti-inanição ativada! Executando processo de prioridade média/baixa");
+            contador_ciclos_alta_prioridade = 0;
+            
+            // Tenta média prioridade primeiro
+            if (!lista_media_prioridade.estaVazia()) {
+                return lista_media_prioridade.removerDoInicio();
+            }
+            // Se não houver média, tenta baixa
+            if (!lista_baixa_prioridade.estaVazia()) {
+                return lista_baixa_prioridade.removerDoInicio();
+            }
+        }
+        
+        // Execução padrão: alta -> média -> baixa
+        if (!lista_alta_prioridade.estaVazia()) {
+            contador_ciclos_alta_prioridade++;
+            return lista_alta_prioridade.removerDoInicio();
+        }
+        
+        if (!lista_media_prioridade.estaVazia()) {
+            return lista_media_prioridade.removerDoInicio();
+        }
+        
+        if (!lista_baixa_prioridade.estaVazia()) {
+            return lista_baixa_prioridade.removerDoInicio();
+        }
+        
+        return null; // Nenhum processo disponível
+    }
+
+    // Mostra o estado atual de todas as listas
+    private void mostrarEstadoListas() {
+        System.out.println("Lista Alta Prioridade: " + lista_alta_prioridade);
+        System.out.println("Lista Média Prioridade: " + lista_media_prioridade);
+        System.out.println("Lista Baixa Prioridade: " + lista_baixa_prioridade);
+        System.out.println("Lista Bloqueados: " + lista_bloqueados);
+        System.out.println("Contador Anti-Inanição: " + contador_ciclos_alta_prioridade + "/5");
+    }
+
+    // Verifica se ainda há processos para executar
+    public boolean temProcessos() {
+        return !lista_alta_prioridade.estaVazia() || 
+               !lista_media_prioridade.estaVazia() || 
+               !lista_baixa_prioridade.estaVazia() || 
+               !lista_bloqueados.estaVazia();
+    }
+}
