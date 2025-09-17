@@ -17,3 +17,26 @@ public class Processo {
         this.ciclos_necessarios = ciclos_necessarios;
         this.recurso_necessario = recurso_necessario;
     }
+// Getters
+    public int getId() { return id; }
+    public String getNome() { return nome; }
+    public int getPrioridade() { return prioridade; }
+    public int getPrioridadeOriginal() { return prioridade_original; }
+    public int getCiclosNecessarios() { return ciclos_necessarios; }
+    public String getRecursoNecessario() { return recurso_necessario; }
+
+    // Setters
+    public void setPrioridade(int prioridade) { this.prioridade = prioridade; }
+    public void setCiclosNecessarios(int ciclos) { this.ciclos_necessarios = ciclos; }
+    public void setRecursoNecessario(String recurso) { this.recurso_necessario = recurso; }
+    
+    // Libera o recurso necessário (usado após desbloqueio)
+    public void liberarRecurso() { this.recurso_necessario = null; }
+
+    // Método para diminuir ciclos necessários
+    public void executarCiclo() {
+        if (ciclos_necessarios > 0) {
+            ciclos_necessarios--;
+        }
+    }
+
