@@ -105,3 +105,54 @@ public class iCEVOS {
             return false;
         }
     }
+
+     private static void criarProcessosExemplo(Scheduler scheduler) {
+        // Processos de exemplo com diferentes prioridades e recursos
+        Processo p1 = new Processo(1, "Sistema", 1, 3, null);
+        Processo p2 = new Processo(2, "Editor", 2, 5, "DISCO");
+        Processo p3 = new Processo(3, "Backup", 3, 4, null);
+        Processo p4 = new Processo(4, "Antivirus", 1, 2, null);
+        Processo p5 = new Processo(5, "Navegador", 2, 6, null);
+        Processo p6 = new Processo(6, "Compilador", 1, 4, "DISCO");
+        Processo p7 = new Processo(7, "Limpeza", 3, 3, null);
+        
+        scheduler.adicionarProcesso(p1);
+        scheduler.adicionarProcesso(p2);
+        scheduler.adicionarProcesso(p3);
+        scheduler.adicionarProcesso(p4);
+        scheduler.adicionarProcesso(p5);
+        scheduler.adicionarProcesso(p6);
+        scheduler.adicionarProcesso(p7);
+        
+        System.out.println("Processos de exemplo criados:");
+        System.out.println("P1: Sistema (Alta, 3 ciclos)");
+        System.out.println("P2: Editor (Média, 5 ciclos, DISCO)");
+        System.out.println("P3: Backup (Baixa, 4 ciclos)");
+        System.out.println("P4: Antivirus (Alta, 2 ciclos)");
+        System.out.println("P5: Navegador (Média, 6 ciclos)");
+        System.out.println("P6: Compilador (Alta, 4 ciclos, DISCO)");
+        System.out.println("P7: Limpeza (Baixa, 3 ciclos)\n");
+    }
+
+    // Executa a simulação do escalonador
+    private static void executarSimulacao(Scheduler scheduler) {
+        System.out.println("=== INICIANDO SIMULAÇÃO ===");
+        
+        int maxCiclos = 50; // Limite de segurança
+        int ciclo = 0;
+        
+        while (scheduler.temProcessos() && ciclo < maxCiclos) {
+            scheduler.executarCicloDeCPU();
+            ciclo++;
+
+        }
+        
+        if (ciclo >= maxCiclos) {
+            System.out.println("\n*** SIMULAÇÃO INTERROMPIDA - Limite de ciclos atingido ***");
+        } else {
+            System.out.println("\n*** SIMULAÇÃO CONCLUÍDA - Todos os processos terminaram ***");
+        }
+        
+        System.out.println("Total de ciclos executados: " + ciclo);
+    }
+}
