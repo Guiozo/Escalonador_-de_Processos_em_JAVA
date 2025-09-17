@@ -39,4 +39,25 @@ public class Processo {
             ciclos_necessarios--;
         }
     }
+  // Verifica se o processo terminou
+    public boolean terminou() {
+        return ciclos_necessarios <= 0;
+    }
 
+    // Verifica se precisa do recurso DISCO
+    public boolean precisaDisco() {
+        return "DISCO".equals(recurso_necessario);
+    }
+    
+    // Verifica se foi bloqueado por recurso DISCO na primeira vez
+    public boolean foiBloqueadoPorDisco() {
+        return "DISCO".equals(recurso_necessario);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("P%d(%s, Prio:%d, Ciclos:%d, Recurso:%s)", 
+                id, nome, prioridade, ciclos_necessarios, 
+                recurso_necessario != null ? recurso_necessario : "Nenhum");
+    }
+}
