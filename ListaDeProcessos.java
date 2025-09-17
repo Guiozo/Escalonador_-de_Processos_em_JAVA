@@ -43,3 +43,44 @@ public class ListaDeProcessos {
         tamanho--;
         return processo;
     }
+    
+// Verifica se a lista está vazia
+    public boolean estaVazia() {
+        return inicio == null;
+    }
+
+    // Retorna o tamanho da lista
+    public int getTamanho() {
+        return tamanho;
+    }
+
+    // Retorna uma representação em string da lista
+    public String toString() {
+        if (estaVazia()) {
+            return "[]";
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        
+        No atual = inicio;
+        while (atual != null) {
+            sb.append(atual.getProcesso().toString());
+            if (atual.getProximo() != null) {
+                sb.append(", ");
+            }
+            atual = atual.getProximo();
+        }
+        
+        sb.append("]");
+        return sb.toString();
+    }
+
+    // Retorna o primeiro processo sem removê-lo
+    public Processo obterPrimeiro() {
+        if (inicio == null) {
+            return null;
+        }
+        return inicio.getProcesso();
+    }
+}
