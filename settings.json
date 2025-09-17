@@ -1,0 +1,12 @@
+{
+    "java.project.sourcePaths": ["src"],
+    "java.project.outputPath": "bin",
+    "java.compile.nullAnalysis.mode": "disabled",
+    "java.saveActions.organizeImports": true,
+    "files.exclude": {
+        "**/bin": true,
+        "**/*.class": true
+    },
+    "java.debug.settings.console": "integratedTerminal",
+    "java.debug.settings.hotCodeReplace": "manual"
+}
