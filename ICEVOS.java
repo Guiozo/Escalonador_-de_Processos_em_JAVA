@@ -5,7 +5,7 @@ import java.util.Scanner;
  * Classe principal do simulador iCEVOS
  * Lê dados de arquivo e executa o escalonador
  */
-public class iCEVOS {
+public class ICEVOS {
     public static void main(String[] args) {
         System.out.println("=== SIMULADOR iCEVOS - ESCALONADOR DE PROCESSOS ===\n");
         
