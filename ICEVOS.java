@@ -138,7 +138,7 @@ public class ICEVOS {
     private static void executarSimulacao(Scheduler scheduler) {
         System.out.println("=== INICIANDO SIMULAÇÃO ===");
         
-        int maxCiclos = 50; // Limite de segurança
+        int maxCiclos = 999999999; // Limite de segurança
         int ciclo = 0;
         
         while (scheduler.temProcessos() && ciclo < maxCiclos) {
